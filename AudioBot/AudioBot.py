@@ -6,8 +6,8 @@ from gtts import gTTS
 from playsound import playsound
 
 sr = speech_recognition.Recognizer()
-sr.pause_threshold = 0.4
-sr.non_speaking_duration = 0.3
+sr.pause_threshold = 0.8
+sr.non_speaking_duration = 0.5
 
 flag = True
 
@@ -31,7 +31,7 @@ def listen_command():
     playsound('data/listen.mp3')
     try:
         with speech_recognition.Microphone() as mic:
-            sr.adjust_for_ambient_noise(source=mic, duration=0.5)
+            sr.adjust_for_ambient_noise(source=mic, duration=1)
             audio = sr.listen(source=mic)
             query = sr.recognize_google(audio_data=audio, language="ru-RU").lower()
         playsound('data/end.mp3')
@@ -50,19 +50,35 @@ def end_bot():
     playsound('data/end_bot.mp3')
     flag = False
 
-
 def create_task():
     playsound('data/task.mp3')
     query = listen_command()
 
     if query != TEXT_ERROR:
-        with open('todo-list.txt', 'a') as file:
+        # Сохраняем текст в UTF-8
+        with open('todo-list.txt', 'a', encoding='utf-8') as file:
             file.write(f'{query}\n')
+
+        # Формируем текст для озвучки
         text_val = f'Задача {query} добавлена в список дел'
-        text_val.encode('utf8')
+
+        # Передаём строку в gTTS без encode()
         obj = gTTS(text=text_val, lang=language, slow=False)
         obj.save('data/end_task.mp3')
         playsound('data/end_task.mp3')
+
+# def create_task():
+#     playsound('data/task.mp3')
+#     query = listen_command()
+#
+#     if query != TEXT_ERROR:
+#         with open('todo-list.txt', 'a', encoding='utf-8') as file:
+#             file.write(f'{query}\n')
+#         text_val = f'Задача {query} добавлена в список дел'
+#         text_val.encode('utf8')
+#         obj = gTTS(text=text_val, lang=language, slow=False)
+#         obj.save('data/end_task.mp3')
+#         playsound('data/end_task.mp3')
 
 
 def play_music():

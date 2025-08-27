@@ -104,6 +104,7 @@ class MyBot(commands.Bot):
 
     async def on_member_join(self, member):
         role = member.guild.get_role(834160821650718731)
+        "764062786228584449"
         with open('data.txt', encoding='utf8') as f:
             was, dd = f.readlines()
         kolvo = int(dd)
@@ -157,7 +158,7 @@ class MyBot(commands.Bot):
                                "https://media1.tenor.com/images/a44f316008d24797dc856c1dfd3a358d/tenor.gif?itemid=18100923",
                                "https://media1.tenor.com/images/933f8a346605b97c7e36b5cb0ae1924b/tenor.gif?itemid=17215102",
                                "https://media1.tenor.com/images/dd6393211b2201c997b3748dfcd9a659/tenor.gif?itemid=17837808",
-                               "https://media1.ten  or.com/images/2e77832cba70c65df33a229118af1c8e/tenor.gif?itemid=20701760",
+                               "https://media1.tenor.com/images/2e77832cba70c65df33a229118af1c8e/tenor.gif?itemid=20701760",
                                "https://media1.tenor.com/images/f82fdfe817cfb8dacb5bd5c7dadb632d/tenor.gif?itemid=8718221",
                                "https://media1.tenor.com/images/26833e994e88a08d8cb702a7253327ac/tenor.gif?itemid=19924894",
                                "https://media1.tenor.com/images/3e674bb3a6e33e2f13c7d0a415af8674/tenor.gif?itemid=15235491",

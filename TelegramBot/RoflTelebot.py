@@ -46,15 +46,14 @@ async def main():
         mess = f"Привет, <b><u>{message.from_user.username}</u></b>, Я бот помощник для Star.\n" \
                f"Для удобной работы со мной, лучше всего зарегистрироваться\n" \
                f"Если у вас уже есть аккаунт, то можете войти в него. /logIn\n" \
-               f"Для лучшего понимания работы бота используйте функцию /help\n",
+               f"Для лучшего понимания работы бота используйте функцию /help\n"
         bot.send_message(message.chat.id, mess, reply_markup=start_markup, parse_mode='html')
 
     # функция для вызова файла с инструкцией по использоавнию
     @bot.message_handler(commands=['help'])
     def help(message):
-        doc = open("tmp/help.txt", mode="rb")
-        bot.send_document(message.chat.id, doc)
-        doc.close()
+        with open("rofltmp/help.txt", mode="rb") as doc:
+            bot.send_document(message.chat.id, doc)
 
     # функция для скрытия клавиатуры
     @bot.message_handler(commands=['close'])
@@ -166,9 +165,8 @@ async def main():
     # функции для удаления аккаунта
     @bot.message_handler(commands=['del_acc'])
     def del_acc(message):
-        img = open("tmp/dpf.jpg", mode="rb")
-        bot.send_photo(message.chat.id, img)
-        img.close()
+        with open("tmp/dpf.jpg", mode="rb") as img:
+            bot.send_photo(message.chat.id, img)
         tb = bot.send_message(message.chat.id, "Для подтверждения удаления аккаунта введите то, что увидите на фото")
         bot.register_next_step_handler(tb, del_acc2)
 
@@ -198,7 +196,6 @@ async def main():
                              reply_markup=start_markup, parse_mode='html')
         bot.delete_message(message.chat.id, message.message_id - 2)
         bot.delete_message(message.chat.id, message.message_id)
-
 
     # функция для показа профиля пользователя
     @bot.message_handler(commands=['profile'])
@@ -358,6 +355,7 @@ async def main():
         cur.close()
 
         # функции для регистрации
+
     @bot.message_handler(commands=["gif_s"])
     def gif_s(message):
         try:

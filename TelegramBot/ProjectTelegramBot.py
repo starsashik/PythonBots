@@ -328,7 +328,7 @@ async def main():
                         res1 = cur.execute(command1).fetchone()
                         d.append(res1[0])
                     gg[j[1]] = round(sum(d) / 27)
-                gg = sorted(gg.items(), key=lambda x: (x[1], x[0]))
+                gg = sorted(gg.items(), key=lambda x: (-x[1], x[0]))
                 cur.close()
                 st = ""
                 for k in range(len(gg)):
