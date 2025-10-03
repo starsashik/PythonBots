@@ -8,7 +8,7 @@ from telebot import types
 import requests
 
 # константы для использования
-TOKEN = '7790194799:AAGm8OPcfu-j5QgKcPYa3GRmU0JsmuooSz8'
+TOKEN = '7790194799:AAHsQdBUIp3Zg9s2NsrTMCvrSPJP_3p87kk'
 db_name = "rofltmp/RoflTeleBotDB.db"
 
 GIPHY_URL = "http://api.giphy.com/v1/gifs/random"
@@ -28,10 +28,15 @@ tasks_markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 tasks_markup.add("/task1").add('/gif_r', "/gif_s").add("/back")
 
 
-
 # главная фунция в которой работает бот
 async def main():
     bot = telebot.TeleBot(TOKEN)
+    # УДАЛЯЕМ ВЕБХУК ПЕРЕД ЗАПУСКОМ ПОЛЛИНГА
+    try:
+        bot.delete_webhook(drop_pending_updates=True)
+        print("✅ Вебхук удален, запускаем бота...")
+    except Exception as e:
+        print(f"⚠️ Ошибка при удалении вебхука: {e}")
     con = sqlite3.connect(db_name)
     cur = con.cursor()
     command = f"""SELECT id FROM User"""
@@ -85,7 +90,7 @@ async def main():
         passwords = "b" + message.text
         password = hashlib.md5(passwords.encode("utf8"))
         bot.delete_message(message.chat.id, message.message_id)
-        
+
         con = sqlite3.connect(db_name)
         cur = con.cursor()
         command = f"""INSERT INTO User  VALUES(?, ?, ?);"""
@@ -95,7 +100,7 @@ async def main():
 
         con.commit()
         con.close()
-        
+
         bot.send_message(message.chat.id, f"Добро пожаловать, <b><u>{message.from_user.username}</u></b>!",
                          parse_mode='html',
                          reply_markup=main_markup)
@@ -368,7 +373,7 @@ async def main():
                                  reply_markup=start_markup)
         except KeyError:
             bot.send_message(message.chat.id, f"/start",
-                         reply_markup=start_markup)
+                             reply_markup=start_markup)
 
     def gif_s2(message):
         try:
@@ -403,7 +408,7 @@ async def main():
                                  reply_markup=start_markup)
         except KeyError:
             bot.send_message(message.chat.id, f"/start",
-                         reply_markup=start_markup)
+                             reply_markup=start_markup)
 
     # функция для отработки callback"ов (меню заданий)
     @bot.callback_query_handler(func=lambda call: True)

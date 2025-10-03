@@ -13,7 +13,7 @@ from wikipedia import wikipedia
 ##########################################################
 
 db_name = "Bot.db"
-BOT_TOKEN = "ODI2MDc5NzM2MjU3NTc3MDIy.GeRTJv.FyO-WGIEgH-oMn2ziknsYjFQpD9HkebIXQxk68"
+BOT_TOKEN = "ODI2MDc5NzM2MjU3NTc3MDIy.Gdwbiu.WluO3H1CJMAHKB0tiPTCC0eppmN8wm6PmtkY2Q"
 
 GIPHY_URL = "http://api.giphy.com/v1/gifs/random"
 GIPHY_API_KEY = "0RqPL06VxBzUsmccUTp3Whzz9SR2ncSA"
@@ -65,7 +65,7 @@ class MyBot(commands.Bot):
             was, dd = f.readlines()
             was = int(was)
             now = datetime.now().hour * 3600 + datetime.now().minute * 60 + datetime.now().second
-        if abs(now - was) >= 1800:
+        if abs(now - was) >= 0:
             await self.guilds[1].channels[5].send("""Привет, я - бот-помощник Саня, созданный исключительно в
             развлекательных целях. О моих умениях вы можете узнать, написав *!!help_bot*""")
             await self.guilds[1].channels[5].send(

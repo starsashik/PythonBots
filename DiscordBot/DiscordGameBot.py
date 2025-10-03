@@ -16,7 +16,7 @@ from wikipedia import wikipedia
 
 
 db_name = "Bot.db"
-BOT_TOKEN = "ODI2MDc5NzM2MjU3NTc3MDIy.GBauxC.zViZm_ggRQm6Xdvz38nppeULwRUAnokuQLIWPY"
+BOT_TOKEN = "ODI2MDc5NzM2MjU3NTc3MDIy.Gdwbiu.WluO3H1CJMAHKB0tiPTCC0eppmN8wm6PmtkY2Q"
 # WEATHER_URL = "https://api.weather.yandex.ru/v2/forecast/"
 # WEATHER_API_KEY = "f1419c4e-141e-41df-9c0e-a692af8b48c1"
 GEOCODER_URL = "http://geocode-maps.yandex.ru/1.x/"
