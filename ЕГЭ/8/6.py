@@ -1,6 +1,7 @@
 from itertools import permutations
 
 chisla = set(permutations("ШАРЛАТАН", 8))
+print(chisla)
 k = 0
 for i in chisla:
     w = ''.join(i)

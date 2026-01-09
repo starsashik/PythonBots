@@ -1,4 +1,4 @@
-def f(n):
+"""def f(n):
    b = bin(n)[2:]
    ff = b.count('1')
    if ff % 2 == 0:
@@ -11,4 +11,18 @@ def f(n):
 for i in range(5, 1000):
    if f(i) > 40:
        print(i)
-       break
+       break"""
+
+def f(n):
+    b = bin(n)[2:]
+    if n % 3 == 0:
+        b += b[-3:]
+    else:
+        s = bin((n%3) * 3)[2:]
+        b += s
+    return int(b, 2)
+
+for i in range(4, 1000):
+    if f(i) >= 200:
+        print(i, f(i))
+        break
