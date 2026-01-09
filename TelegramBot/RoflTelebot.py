@@ -8,7 +8,7 @@ from telebot import types
 import requests
 
 # константы для использования
-TOKEN = '7790194799:AAHsQdBUIp3Zg9s2NsrTMCvrSPJP_3p87kk'
+TOKEN = '7790194799:AAG7BQ2AyTAzussYmjym1S9r8JuebvvNaCg'
 db_name = "rofltmp/RoflTeleBotDB.db"
 
 GIPHY_URL = "http://api.giphy.com/v1/gifs/random"

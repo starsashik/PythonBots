@@ -18,12 +18,11 @@ main_markup = (telebot.types.ReplyKeyboardMarkup(resize_keyboard=True).row("/sta
                row("/subscribe", "/unsubscribe"))
 register_markup = (telebot.types.ReplyKeyboardMarkup(resize_keyboard=True).row("/set_website lenta", "/set_website ria",
                                                                                "/set_website tass").
-                   row("/set_website kommersant", "/set_website gazeta", "/set_website rbc"))
+                   row("/set_website kommersant", "/set_website rbc"))
 Websites = {"lenta": "https://lenta.ru/rss/news",
             "ria": "https://ria.ru/export/rss2/archive/index.xml",
             "tass": "https://tass.ru/rss/v2.xml",
             "kommersant": "https://www.kommersant.ru/rss/news.xml",
-            "gazeta": "https://www.gazeta.ru/export/rss/first.xml",
             "rbc": "https://rssexport.rbc.ru/rbcnews/news/30/full.rss"}
 bot = telebot.TeleBot(TOKEN)
 
@@ -96,7 +95,7 @@ def get_news(new_url="https://lenta.ru/rss/news", number=5):
         date = entry.get("published", "Дата не указана")
         link = entry.get("link", "Без ссылки")
         news.append(f"{title}!:{summary if len(summary) > 0 else 'Нет описания'}!:{date}!:{link}")
-    return "\n".join(news)
+    return "\n".join(news[::-1])
 
 
 # def get_news():
@@ -166,9 +165,8 @@ def news(message):
         i2 = types.InlineKeyboardButton(text='RIA.ru', callback_data="s2")
         i3 = types.InlineKeyboardButton(text='TASS.ru', callback_data="s3")
         i4 = types.InlineKeyboardButton(text='Kommersant.ru', callback_data="s4")
-        i5 = types.InlineKeyboardButton(text='Gazeta.ru', callback_data="s5")
-        i6 = types.InlineKeyboardButton(text='RBC.ru', callback_data="s6")
-        mi1.row(i1, i2, i3).row(i4, i5, i6)
+        i5 = types.InlineKeyboardButton(text='RBC.ru', callback_data="s5")
+        mi1.row(i1, i2, i3).row(i4, i5)
         bot.send_message(message.chat.id,
                          f"Выберите сайт",
                          reply_markup=mi1, parse_mode='html')
@@ -245,9 +243,6 @@ def task(call):
         bot.answer_callback_query(call.id, "Вы выбрали Kommersant.ru!", False)
         website = "kommersant"
     elif call.data == "s5":
-        bot.answer_callback_query(call.id, "Вы выбрали Gazeta.ru!", False)
-        website = "gazeta"
-    elif call.data == "s6":
         bot.answer_callback_query(call.id, "Вы выбрали RBC.ru!", False)
         website = "rbc"
 
