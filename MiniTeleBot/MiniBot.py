@@ -5,7 +5,7 @@ from datetime import time
 
 from telegram import Update
 from telegram.ext import (
-    ApplicationBuilder,
+    Application,
     CommandHandler,
     MessageHandler,
     ContextTypes,
@@ -16,7 +16,7 @@ from telegram.ext import (
 # 🔑 НАСТРОЙКИ
 # =======================
 
-TELEGRAM_TOKEN = '8465295022:AAGuWUwBEg0Cgte3Qa66ehuJUZpz560NEd0'
+TELEGRAM_TOKEN = '8465295022:AAF1nLHizSXcVzbJhf3ufRaqveWPpyh3GXs'
 GIPHY_API_KEY = "0RqPL06VxBzUsmccUTp3Whzz9SR2ncSA"
 
 # =======================
@@ -163,7 +163,7 @@ async def reply_to_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # 🚀 ЗАПУСК
 # =======================
 def main():
-    app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, reply_to_message))

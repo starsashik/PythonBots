@@ -12,7 +12,7 @@ from telebot import types
 import feedparser
 
 # ---------- Константы для использования ----------
-TOKEN = '8411974595:AAFairg4eftPoz6f4083mv_1RSygXg2vduY'
+TOKEN = '8584782700:AAE4Zr_RHVUEExePfshZJhtUiS2mef1hWHA'
 db_name = "tmp/ParserDB.db"
 main_markup = (telebot.types.ReplyKeyboardMarkup(resize_keyboard=True).row("/start").row("/news").
                row("/subscribe", "/unsubscribe"))

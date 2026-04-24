@@ -7,7 +7,7 @@ import telebot
 from telebot import types
 
 # константы для использования
-TOKEN = '1633681368:AAEHBoqBKhg26ai_tPsw16qZJrgn-2tqFyU'
+TOKEN = '1633681368:AAHD6pmd4Fp6AC12eZQEe20NTPcZpLQ-GJk'
 db_name = "tmp/TeleDB.db"
 
 # Reply клавиатуры
@@ -334,8 +334,8 @@ async def main():
                 for k in range(len(gg)):
                     st += f"{k + 1} место: {gg[k][0]} - {gg[k][1]}%\n"
                     bot.send_message(message.chat.id,
-                                 st,
-                                 reply_markup=login_markup, parse_mode='html')
+                                     st,
+                                     reply_markup=login_markup, parse_mode='html')
             else:
                 bot.send_message(message.chat.id,
                                  f"<b><u>{message.from_user.username}</u></b> чтобы посмотреть свой профиль "
