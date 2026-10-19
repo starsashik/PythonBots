@@ -5,9 +5,13 @@ import sqlite3
 
 import telebot
 from telebot import types
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../.env")
 
 # константы для использования
-TOKEN = '1633681368:AAHD6pmd4Fp6AC12eZQEe20NTPcZpLQ-GJk'
+TOKEN = os.getenv("Project_Telegram_Bot")
 db_name = "tmp/TeleDB.db"
 
 # Reply клавиатуры
@@ -49,6 +53,7 @@ async def main():
     result = cur.execute(command).fetchall()
     cur.close()
     dd = {i[0]: False for i in result}
+    print("Бот успешно загружен")
 
     # функция для началы работы бота
     @bot.message_handler(commands=["start"])

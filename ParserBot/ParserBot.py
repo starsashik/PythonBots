@@ -10,9 +10,13 @@ import requests
 from bs4 import BeautifulSoup
 from telebot import types
 import feedparser
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../.env")
 
 # ---------- Константы для использования ----------
-TOKEN = '8584782700:AAE4Zr_RHVUEExePfshZJhtUiS2mef1hWHA'
+TOKEN = os.getenv("Parser_Telegram_Bot")
 db_name = "tmp/ParserDB.db"
 main_markup = (telebot.types.ReplyKeyboardMarkup(resize_keyboard=True).row("/start").row("/news").
                row("/subscribe", "/unsubscribe"))

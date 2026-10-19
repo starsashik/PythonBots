@@ -6,9 +6,13 @@ import sqlite3
 import telebot
 from telebot import types
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../.env")
 
 # константы для использования
-TOKEN = '7790194799:AAFZ3ijGW8JRAEqJv8rhduA0yTQqaAlEp_8'
+TOKEN =  os.getenv("Rofl_Telegram_Bot")
 db_name = "rofltmp/RoflTeleBotDB.db"
 
 GIPHY_URL = "http://api.giphy.com/v1/gifs/random"

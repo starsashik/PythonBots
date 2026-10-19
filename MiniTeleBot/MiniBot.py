@@ -12,12 +12,17 @@ from telegram.ext import (
     filters,
 )
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../.env")
+
 # =======================
 # 🔑 НАСТРОЙКИ
 # =======================
 
-TELEGRAM_TOKEN = '8465295022:AAF1nLHizSXcVzbJhf3ufRaqveWPpyh3GXs'
-GIPHY_API_KEY = "0RqPL06VxBzUsmccUTp3Whzz9SR2ncSA"
+TELEGRAM_TOKEN = os.getenv("Mini_Telegram_Bot")
+GIPHY_API_KEY = os.getenv("Giphy_Api_key")
 
 # =======================
 # 💌 ТЕКСТЫ
@@ -129,7 +134,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.job_queue.run_repeating(
         send_gif,
         interval=60 * 60 * 6,
-        first=120,
+        first=10,
         chat_id=chat_id,
     )
 
