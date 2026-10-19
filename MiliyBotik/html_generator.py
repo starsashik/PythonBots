@@ -1,0 +1,35 @@
+from html import escape
+from pathlib import Path
+from config import DATA_DIR
+
+
+def generate_html(invitation: dict) -> Path:
+    date, clock = invitation['datetime'].split('T')
+    yyyy, mm, dd = date.split('-')
+    pretty_date = f'{dd}.{mm}.{yyyy} в {clock[:5]}'
+    def e(value):
+        return escape(str(value), quote=True)
+    page = '''<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Приглашение на свидание 💌</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:radial-gradient(circle at top left,#ffe3ee,#fff8f6 60%,#eedfff);color:#58344a;padding:22px}
+.card{max-width:520px;width:100%;background:#ffffffdc;border:1px solid #fff;box-shadow:0 24px 80px #a96a902e;border-radius:30px;padding:35px 28px;text-align:center;animation:appear .8s ease}
+@keyframes appear{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.heart{font-size:64px;animation:pulse 1.8s infinite}@keyframes pulse{50%{transform:scale(1.12)}}h1{font-size:30px;margin:8px 0 10px;color:#d74d89}p{line-height:1.55}.muted{color:#987b8b}.detail{padding:13px 15px;margin:11px 0;border-radius:16px;text-align:left;background:#fff1f6}.detail b{display:block;color:#bf4980;margin-bottom:3px}
+button{background:#e75693;color:white;padding:13px 20px;border:0;border-radius:100px;cursor:pointer;font-size:15px;margin-top:10px}.secret{display:none;background:#fff1f6;border-radius:16px;padding:16px;margin-top:14px}.footer{font-size:14px;color:#997e8e;margin-top:22px}
+</style></head><body><article class="card"><div class="heart">💌</div><h1>Ты приглашена на свидание!</h1><p class="muted">Маленькое приключение для нас двоих ✨</p>
+<div class="detail"><b>📅 Когда</b>__DATE__</div><div class="detail"><b>📍 Где</b>__PLACE__</div>
+<div class="detail"><b>👗 Во что одеться</b>__DRESS__</div><div class="detail"><b>🎒 Что взять с собой</b>__BRING__</div>
+<button onclick="document.getElementById('secret').style.display='block';this.style.display='none'">✨ Открыть подсказку</button>
+<div class="secret" id="secret">__HINT__</div><p><em>__MESSAGE__</em></p><div class="footer">С любовью ❤️</div></article></body></html>'''
+    replace = {'__DATE__': pretty_date, '__PLACE__': invitation['place'],
+               '__DRESS__': invitation['dress_code'], '__BRING__': invitation['bring'],
+               '__HINT__': invitation['hint'], '__MESSAGE__': invitation['message']}
+    for key, value in replace.items():
+        page = page.replace(key, e(value))
+    folder = DATA_DIR / 'html'
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / f"invitation_{invitation['id']}.html"
+    path.write_text(page, encoding='utf-8')
+    return path
